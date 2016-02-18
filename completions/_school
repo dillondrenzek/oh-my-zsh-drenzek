@@ -1,0 +1,39 @@
+#compdef school
+ 
+_school() { 
+    local curcontext="$curcontext" state line
+    typeset -A opt_args
+
+    _arguments \
+    	'1: :->function'\
+    	'2: :->class'\
+      	'3: :->project'
+ 
+    case $state in
+      function )
+        _arguments '1:functions:(work admin)'
+        ;;
+      class )
+        _arguments '2:classes:(operating-systems computation capstone object-oriented)'
+        ;;
+      project )
+        case $words[3] in
+          operating-systems)
+            _arguments '3:projects:(project1 project2 project3)'
+          ;;
+          computation)
+            _arguments '3:projects:(project4 project5 project6)'
+          ;;
+          capstone)
+            _arguments '3:projects:(portal sinatra-portal)'
+          ;;
+          object-oriented)
+            _arguments '3:projects:(project10 project11 project12)'
+          ;;
+        esac
+        ;;
+    esac
+
+}
+ 
+_school "$@"
